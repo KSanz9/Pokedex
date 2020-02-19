@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 require('./app/routes/puntuaciones.routes.js')(app); */
 
 // Escuchemos en un puerto
-app.listen(3000,() => {
-    console.log(" * Miniserver UP and Running en http://localhost:3000");
+app.listen(4000,() => {
+    console.log(" * Miniserver UP and Running en http://localhost:4000");
 });
 
