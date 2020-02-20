@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const PORT = process.env.PORT || 3000;
 
 /* const dbConfig = require('./config/database.config'); */
 
@@ -34,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 require('./app/routes/puntuaciones.routes.js')(app); */
 
 // Escuchemos en un puerto
-app.listen(50000,() => {
+app.listen(PORT,() => {
     console.log(" * Miniserver UP and Running en http://localhost:50000");
 });
 
