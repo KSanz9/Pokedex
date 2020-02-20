@@ -52,7 +52,7 @@ function cargarPokemons(jsonPokes) {
 
     pokem.textContent = element.name.toUpperCase();
     arrayPoke = element.url.split("/");
-    poke.classList = arrayPoke[6];
+    poke.classList.add(arrayPoke[6]);
 
 
     poke.appendChild(pokem);
@@ -61,11 +61,17 @@ function cargarPokemons(jsonPokes) {
 
     poke.id = poke.innerText.toLowerCase();
 
-    poke.children[0].addEventListener("click", mostrarPokemon);
+    //poke.children[0].addEventListener("click", mostrarPokemon);
+    poke.addEventListener("click", mostrarPokemon);
+   // poke.getElementsByTagName("img")[0].addEventListener("click", anular);
+  //  poke.getElementsByTagName("p")[0].addEventListener("click", anular);
   });
 
 }
 
+function anular(e) {
+  e.stopPropagation();
+}
 function cargarSprites(urlSprite) {
 
   return fetch(urlSprite)
@@ -81,6 +87,8 @@ function cargarSprites(urlSprite) {
 async function mostrarPokemon(e) {
 
 
+  console.log(this);
+ // console.log(e.target);
 
 
   let pokemons = document.getElementById("Pokemon");
@@ -91,14 +99,14 @@ async function mostrarPokemon(e) {
   pokemons.innerHTML = "";
 
   document.getElementById("cargando").style.display = "inherit";
-
-  await colocarPokemon(e.target.parentNode, MostarDatos);
+  
+  await colocarPokemon(this, MostarDatos);
 
   document.getElementById("cargando").style.display = "none";
 
 
   document.getElementById("Pokemon").appendChild(MostarDatos);
-  
+  e.stopPropagation();
 }
 
 async function colocarPokemon(evento, datos) {
@@ -107,9 +115,10 @@ async function colocarPokemon(evento, datos) {
   let typesPokemon;
   let movesPokemon;
   let numeroPokedex;
-  let pesoPokemon;
-  let alturaPokemon;
-  let nP = evento.childNodes[0].innerHTML;
+/*   let pesoPokemon;
+  let alturaPokemon; */
+  let nP = evento.getElementsByTagName("p")[0].innerHTML;
+
   imgPokemon = document.createElement("img");
   imgPokemon.id = "imgPokemonColocado";
 
@@ -131,7 +140,7 @@ async function colocarPokemon(evento, datos) {
   imgPokemon.src = evento.childNodes[1].src;
   datos.appendChild(imgPokemon);
 
-  numeroPokedex.innerHTML = "Nº: #" + evento.classList[0];
+  numeroPokedex.innerHTML = "Nº: #" + evento.classList[1];
   datos.appendChild(numeroPokedex);
 
  
@@ -227,6 +236,7 @@ async function mostrarSprites(e) {
 function darEventos() {
   document.getElementById("cargando").style.display = "none";
   document.getElementById("contenedorPrincipal").style.display = "inherit";
+
   let logo = document.getElementsByClassName("logoTexto")[0];
   logo.addEventListener("click", init);
 

@@ -33,6 +33,8 @@ body {
       text-align: center; }
       body #contenedorPrincipal #Pokemon p {
         cursor: pointer; }
+      body #contenedorPrincipal #Pokemon img {
+        cursor: pointer; }
       body #contenedorPrincipal #Pokemon #PokemonMuestra {
         position: absolute;
         left: 25%;
